@@ -18,16 +18,12 @@
     <div id="root"></div>
     <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.63.1/build/stlite.js"></script>
     <script>
-        // The code prior to this point is the same for every Stlite app you create
 
       stlite.mount(
         {
-        requirements: ["simpy", "math", "streamlit"], // Packages to install
+        requirements: ["simpy"], 
         entrypoint: "app.py",
         files: {
-          // Our first file must contain Streamlit code; this will be used on loading
-          // and in this case is used to define the navigation but is never actually displayed
-          // to the user
       "app.py":`
 # -*- coding: utf-8 -*-
 """
