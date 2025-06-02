@@ -44,7 +44,7 @@ st.info("This tool projects monthly financial solvency using contributor and rec
 # Sidebar inputs
 st.sidebar.header('User Input Features')
 
-t = st.sidebar.slider('T (days)', 10, 90)
+t = st.sidebar.slider('T (Monthly)', 1, 36)
 
 # Contributors and Recipients Inputs
 init_pop_cont = int(st.text_input("Initial Population of Contributors", "100000"))
@@ -53,10 +53,10 @@ init_lump_pop1 = float(st.text_input("Initial Lump Sum Recipient Population (Fir
 init_lump_pop2 = float(st.text_input("Initial Lump Sum Recipient Population (Last time)", "100000"))
 init_pen_pop = float(st.text_input("Initial Pension Recipient Population", "100000"))
 
-Ave_cont = st.sidebar.slider("Average Contribution per Person", 100.0, 200.0)
+Ave_cont = st.sidebar.slider("Average Contribution per Person", 100.0, 1000.0)
 Ave_lump1 = st.sidebar.slider("Average Lump Sum (First time)", 12000.0, 20000.0)
 Ave_lump2 = st.sidebar.slider("Average Lump Sum (Last time)", 3000.0, 10000.0)
-Ave_pen = st.sidebar.slider("Average Pension per Person", 500.0, 1000.0)
+Ave_pen = st.sidebar.slider("Average Pension per Person", 500.0, 10000.0)
 invest = st.sidebar.slider("Estimated Investment Income", 1_000_000.0, 200_000_000.0)
 expend = st.sidebar.slider("Estimated Monthly Expenditure", 1_000_000.0, 200_000_000.0)
 
