@@ -24,7 +24,7 @@
 
       stlite.mount(
         {
-        requirements: ["simpy"], 
+        requirements: ["simpy", "plotly", "numpy"], 
         entrypoint: "app.py",
         files: {
       "app.py":`
@@ -101,6 +101,54 @@ if st.button("💰 Compute Monthly Surplus"):
     surplus = total_cont - total_lump - total_pen + invest - expend
     st.subheader("📊 Surplus Projection")
     st.metric(label="Estimated Surplus", value=f"{surplus:,.2f}")
+        # Plotting with Plotly
+    import numpy as np
+    import plotly.graph_objects as go
+
+    def cumulative_trapezoid(y, x):
+        dx = np.diff(x)
+        avg_y = (y[:-1] + y[1:]) / 2
+        integral = np.zeros_like(y)
+        integral[1:] = np.cumsum(avg_y * dx)
+        return integral
+
+    t_vals = np.linspace(0, t, 300)
+
+    # Contributors
+    term1_array = (epsilon1 / (lam1 - mu1)) * np.exp((lam1 - mu1) * t_vals)
+    term2_array = init_pop_cont * np.exp((lam1 - mu1) * t_vals)
+    entire_pop_cont = cumulative_trapezoid(term1_array + term2_array, t_vals)
+    total_cont_array = entire_pop_cont * Ave_cont
+
+    # Lump Sum Recipients
+    lump_pop1_array = init_lump_pop1 * (1 - np.exp(-mu2 * t_vals))
+    lump_pop2_array = init_lump_pop2 * (1 - np.exp(-epsilon2 * t_vals))
+    total_lump_array = lump_pop1_array * Ave_lump1 + lump_pop2_array * Ave_lump2
+
+    # Pension Recipients
+    term3_array = (epsilon2 / (lam2 - mu2)) * np.exp((lam2 - mu2) * t_vals)
+    term4_array = init_pen_pop * np.exp((lam2 - mu2) * t_vals)
+    pen_pop_array = cumulative_trapezoid(term3_array + term4_array, t_vals)
+    total_pen_array = pen_pop_array * Ave_pen
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=t_vals, y=total_cont_array, mode='lines', name='Total Contributions'))
+    fig.add_trace(go.Scatter(x=t_vals, y=total_lump_array, mode='lines', name='Total Lump Sum Payments'))
+    fig.add_trace(go.Scatter(x=t_vals, y=total_pen_array, mode='lines', name='Total Pension Payments'))
+
+    fig.update_layout(
+        title='Pension System Cash Flows Over Time',
+        xaxis_title='Time (months)',
+        yaxis_title='Amount',
+        template='plotly_white',
+        legend_title='Flow Type',
+        width=800,
+        height=500
+    )
+
+    st.plotly_chart(fig)
+
+
 `,
 }
         },
