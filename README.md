@@ -2,41 +2,44 @@
 
 📈 Contributors
 
-term₁ = (ε₁ / (λ₁ - μ₁)) · e^((λ₁ - μ₁)t)
+(ε₁ / (λ₁ - μ₁)) · e^((λ₁ - μ₁)t):
+Populations of joiners to the scheme influenced by external factors like a change in government policy. 
 
-term₂ = init_pop_cont · e^((λ₁ - μ₁)t)
 
-entire_pop_cont = ∫ (term₁ + term₂) dt
+initialContributorPopulation · e^((λ₁ - μ₁)t):
+Population of joiners to the scheme influenced by the internal factors like the joining rate of new contributors(λ₁) and drop off rate of contributors(μ₁). 
 
-total_cont = entire_pop_cont · Ave_cont
-
+∫ (term₁ + term₂) dt: 
+Population of contributors. 
 
 
 ⸻
 
 💰 Lump Sum Recipients
 
-lump_pop₁ = init_lump_pop₁ · (1 - e^(−μ₂·t))
+initialLumpSumRecipients · (1 - e^(−μ₂·t)):
+Modeling the growth of the population of members who will be recieving their first lump sum over time. 
+ie: members who just retired. 
 
-lump_pop₂ = init_lump_pop₂ · (1 - e^(−ε₂·t))
-
-total_lump = lump_pop₁ · Ave_lump₁ + lump_pop₂ · Ave_lump₂
-
+finalLumpSumRecipients· (1 - e^(−ε₂·t)):
+Modeling the growth of the population of members who will be recieving their last lump sum over time. 
+ie: members who just died. 
 
 
 ⸻
 
 🧓 Pension Recipients
 
-term₃ = (ε₂ / (λ₂ - μ₂)) · e^((λ₂ - μ₂)t)
-
-term₄ = init_pen_pop · e^((λ₂ - μ₂)t)
-
-pen_pop = ∫ (term₃ + term₄) dt
-
-total_pen = pen_pop · Ave_pen
+(ε₂ / (λ₂ - μ₂)) · e^((λ₂ - μ₂)t): 
+Populations of pensioners in the scheme influenced by external factors like a change in retirement age. 
 
 
+
+initialAnnuityRecipients · e^((λ₂ - μ₂)t):
+Population of annuity recipients in the scheme influenced by the internal factors like the joining rate of new pensioners(λ₂) and the death rate of pensioners(μ₂).
+
+∫ (term₃ + term₄) dt:
+Population of annuity recipients. 
 
 ⸻
 
@@ -44,17 +47,13 @@ total_pen = pen_pop · Ave_pen
 
 Symbol	Description
 
-ε₁, ε₂	Entry rates into contributors/pension
+ε₁, ε₂	Entry rates into contributors/pension influenced by external factors like government policies. 
 
 λ₁, λ₂	Contributor and pensioner growth rates
 
 μ₁, μ₂	Contributor and pensioner exit/death rates
 
-init_*	Initial population in each category
-
-Ave_*	Average contribution or payout
-
-t	Time (years)
+t: time in months. 
 
 
 
