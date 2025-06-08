@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep  9 21:28:21 2020
-@author: Sam
+@author: Sumaila Ali
 """
 
 import math as mt
