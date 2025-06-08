@@ -9,11 +9,14 @@ import streamlit as st
 # Title and info
 st.set_page_config(page_title="Solvency Calculator")
 st.title("Solvency Calculator")
-st.info("This tool forecasts financial solvency by modeling the growth of the population of pension contributors and recipients using the logistic function.")
+st.info("This tool forecasts financial solvency by modeling the growth of the population of pension contributors and recipients using a derivative of the logistic function.")
 
 st.title("Tool Assumptions")
-st.info("1. Pension recipients first get a lump sum followed by monthly annuities and a final lump sum upon the death of the contributor." \
-"2. ")
+st.info('''1. Pension recipients first get a lump sum followed by monthly annuities and a final lump sum upon the death of the contributor." 
+"" 
+"2. The lump sum recieved by members is fixed and not subject to interest rate changes. " 
+"3. The contributions made by members is fixed and not subject to interest rate changes." 
+"4. ''')
 # Sidebar inputs
 st.sidebar.header('User Input Features')
 
@@ -98,7 +101,12 @@ if st.button("💰 Compute Monthly Surplus"):
     st.subheader("📊 Surplus Projection")
     st.metric(label="Estimated Surplus", value=f"{surplus:,.2f}")
     
-    
+st.title("Tool Assumptions")
+st.info('''1. Pension recipients first get a lump sum followed by monthly annuities and a final lump sum upon the death of the contributor." 
+"" 
+"2. The lump sum recieved by members is fixed and not subject to interest rate changes. " 
+"3. The contributions made by members is fixed and not subject to interest rate changes." 
+"4. ''')    
     
     # TODO: Plot a chart that represents the movement of funds for the scheme over time. 
     #import numpy as np

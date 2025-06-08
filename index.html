@@ -37,9 +37,7 @@ st.set_page_config(page_title="Solvency Calculator")
 st.title("Solvency Calculator")
 st.info("This tool forecasts financial solvency by modeling the growth of the population of pension contributors and recipients using the logistic function.")
 
-st.title("Tool Assumptions")
-st.info("1. Pension recipients first get a lump sum followed by monthly annuities and a final lump sum upon the death of the contributor." \
-"2. ")
+
 # Sidebar inputs
 st.sidebar.header('User Input Features')
 
@@ -123,7 +121,13 @@ if st.button("💰 Compute Monthly Surplus"):
     surplus = totalContributions - totalLumpSumPayment - totalPensionsPaid - totalExpenditure
     st.subheader("📊 Surplus Projection")
     st.metric(label="Estimated Surplus", value=f"{surplus:,.2f}")
-    
+
+st.title("Tool Assumptions")
+st.info('''1. Pension recipients get a first lump sum followed by monthly annuities and a final lump sum upon their death. 
+
+2. The lump sum recieved by members is fixed and not subject to interest rate changes over time.  
+3. The contributions made by members is fixed and not subject to interest rate changes over time.
+4. The expenditure of the scheme is fixed and not subject to interest changes over time.''')
 `,
 }
         },
